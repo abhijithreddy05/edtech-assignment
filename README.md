@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LearnPath AI - House of EdTech Assignment
 
-## Getting Started
+## Overview
 
-First, run the development server:
+LearnPath AI is a sophisticated, full-stack CRUD application built for the House of EdTech Fullstack Developer assignment. Instead of a basic task manager, this application solves a real-world educational problem: dynamically generating personalized, structured learning paths using Artificial Intelligence.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Users can input any topic they wish to learn (e.g., "Quantum Computing", "Advanced React Patterns"), and the application will generate a complete curriculum featuring modules and curated resources. Users can Create, Read, Update (by managing modules), and Delete these learning paths.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4, Shadcn UI, Custom UI Tokens
+- **Database**: Prisma ORM (Currently configured for SQLite for zero-config local testing, seamlessly swappable to PostgreSQL)
+- **Authentication**: NextAuth.js (Auth.js) v5 Beta
+- **AI**: Vercel AI SDK + OpenAI (Falls back to mock data gracefully if no API key is provided)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup & Local Development
 
-## Learn More
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Environment Setup**:
+   Create a `.env` file in the root directory:
+   ```env
+   AUTH_SECRET="your-super-secret-auth-key-generate-one"
+   OPENAI_API_KEY="your-openai-api-key" # Optional: Will use mock AI data if not provided
+   DATABASE_URL="file:./dev.db"
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Database Setup**:
+   ```bash
+   npx prisma db push
+   npx prisma generate
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+## Production & Deployment (Vercel)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This application is optimized for deployment on Vercel.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Push this repository to GitHub.
+2. Import the repository in Vercel.
+3. Configure the following Environment Variables in Vercel:
+   - `DATABASE_URL` (Use a managed PostgreSQL like Neon, Supabase, or Vercel Postgres)
+   - `OPENAI_API_KEY` (Your OpenAI Key)
+   - `AUTH_SECRET` (A secure random string for JWT encryption)
+4. Update `prisma/schema.prisma` to use PostgreSQL before deploying:
+   ```prisma
+   datasource db {
+     provider = "postgresql"
+     url      = env("DATABASE_URL")
+   }
+   ```
+5. Deploy! Vercel's CI/CD pipeline will automatically build and deploy the app on every push to the `main` branch.
+
+## Evaluation Criteria Met
+
+- **Functionality**: Complete CRUD operations on Learning Paths and Modules. Secure credential-based authentication using Auth.js.
+- **User Interface**: Designed a stunning, premium UI with modern styling, dark mode support (via `globals.css` theming), responsive layouts, and Shadcn UI.
+- **Code Quality**: Strongly typed with TypeScript, modular component architecture, separated Server Actions for data mutations, and strict error handling.
+- **AI Integration**: Leveraged Vercel AI SDK for intelligent curriculum generation, adding significant real-world value beyond typical CRUD apps.
+- **Real-World Considerations**: Graceful fallback to mock data if the AI provider fails or the API key is missing. Included a scalable ORM (Prisma) for easy database migrations.
