@@ -48,7 +48,9 @@ export default function LoginPage() {
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold tracking-tight">Sign in</CardTitle>
           <CardDescription>
-            Enter <strong className="text-foreground">any email and password</strong> below. If the account doesn't exist, we will instantly create it for you!
+            Enter your credentials below. For quick testing, you can use:
+            <br />
+            <span className="font-mono bg-muted px-1 py-0.5 rounded text-xs mt-2 inline-block">Email: test@example.com | Password: 12345</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
