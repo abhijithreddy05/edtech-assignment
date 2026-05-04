@@ -5,8 +5,8 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, PlayCircle, FileText, CheckCircle, ExternalLink, BookOpen, Brain, Trash2 } from "lucide-react"
-import { deleteModule } from "@/app/actions"
+import { ArrowLeft, PlayCircle, FileText, CheckCircle, ExternalLink, BookOpen, Brain } from "lucide-react"
+import { DeleteModuleButton } from "@/components/delete-buttons"
 
 const iconMap: Record<string, React.ReactNode> = {
   video: <PlayCircle className="w-4 h-4" />,
@@ -68,11 +68,7 @@ export default async function LearningPathPage(props: { params: Promise<{ id: st
                 <CardTitle className="text-xl md:text-2xl mb-1">{mod.title}</CardTitle>
                 <CardDescription className="text-base">{mod.description}</CardDescription>
               </div>
-              <form action={deleteModule.bind(null, mod.id, path.id)}>
-                <Button type="submit" variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive shrink-0">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </form>
+              <DeleteModuleButton moduleId={mod.id} pathId={path.id} />
             </CardHeader>
             <CardContent className="pt-6">
               <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground mb-4 flex items-center gap-2">

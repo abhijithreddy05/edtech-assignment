@@ -4,8 +4,8 @@ import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { BookOpen, Plus, Trash2 } from "lucide-react"
-import { deleteLearningPath } from "@/app/actions"
+import { BookOpen, Plus } from "lucide-react"
+import { DeletePathButton } from "@/components/delete-buttons"
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -70,11 +70,7 @@ export default async function DashboardPage() {
                 <Link href={`/dashboard/${path.id}`} className="w-full mr-2">
                   <Button variant="default" className="w-full">View Course</Button>
                 </Link>
-                <form action={deleteLearningPath.bind(null, path.id)}>
-                  <Button type="submit" variant="outline" size="icon" className="text-destructive hover:bg-destructive/10 hover:text-destructive shrink-0">
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </form>
+                <DeletePathButton id={path.id} />
               </CardFooter>
             </Card>
           ))}
