@@ -48,7 +48,7 @@ export default function LoginPage() {
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold tracking-tight">Sign in</CardTitle>
           <CardDescription>
-            Enter your email and a password to sign in or create an account automatically.
+            Enter <strong className="text-foreground">any email and password</strong> below. If the account doesn't exist, we will instantly create it for you!
           </CardDescription>
         </CardHeader>
         <CardContent>
