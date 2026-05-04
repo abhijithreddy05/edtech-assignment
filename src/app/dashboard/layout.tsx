@@ -2,6 +2,7 @@ import Link from "next/link"
 import { auth, signOut } from "@/auth"
 import { Button } from "@/components/ui/button"
 import { redirect } from "next/navigation"
+import { SignOutButton } from "@/components/sign-out-button"
 
 export default async function DashboardLayout({
   children,
@@ -24,12 +25,7 @@ export default async function DashboardLayout({
           <span className="text-sm font-medium hidden sm:inline-block">
             Welcome, {session.user.name || session.user.email}
           </span>
-          <form action={async () => {
-            "use server"
-            await signOut({ redirectTo: "/" })
-          }}>
-            <Button variant="outline" size="sm">Sign Out</Button>
-          </form>
+          <SignOutButton />
         </div>
       </header>
       <main className="flex-1">
